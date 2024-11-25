@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example.bombastic</groupId>
+  <artifactId>dependencies-ftw</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <packaging>pom</packaging>
+
+  <name>dependencies-ftw</name>
+  <description>Just experimenting with boms.</description>
+  <url>https://github.com/jt-nti/bom-bastic</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+
+		<com.ibm.cics.server.invocation.annotations-version>5.5</com.ibm.cics.server.invocation.annotations-version>
+	</properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.ibm.cics</groupId>
+        <artifactId>com.ibm.cics.server</artifactId>
+        <version>1.700.1-5.5-PH25409</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.ibm.cics</groupId>
+        <artifactId>com.ibm.cics.server.invocation</artifactId>
+        <version>5.5</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.ibm.cics</groupId>
+        <artifactId>com.ibm.cics.server.invocation.annotations</artifactId>
+        <version>${com.ibm.cics.server.invocation.annotations-version}</version>
+        <scope>provided</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+	<profiles>
+		<profile>
+			<id>newer-annotation-processor-required</id>
+			<activation>
+				<jdk>[11,)</jdk>
+			</activation>
+			<properties>
+				<com.ibm.cics.server.invocation.annotations-version>6.1</com.ibm.cics.server.invocation.annotations-version>
+			</properties>
+		</profile>
+	</profiles>
+
+</project>
